@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Expanses-tracker/static/css/main.19688bc8.css",
+    "main.js": "/Expanses-tracker/static/js/main.0930db87.js",
+    "index.html": "/Expanses-tracker/index.html",
+    "main.19688bc8.css.map": "/Expanses-tracker/static/css/main.19688bc8.css.map",
+    "main.0930db87.js.map": "/Expanses-tracker/static/js/main.0930db87.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.19688bc8.css",
+    "static/js/main.0930db87.js"
+  ]
+}
