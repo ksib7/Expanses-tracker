@@ -14,8 +14,8 @@ export const Main: FC = () => {
   return (
     <>
       <GlobalProvider>
-        <Header />
         <div className="container">
+          <Header />
           <Balance />
           <IncomeExpanses />
           <History />

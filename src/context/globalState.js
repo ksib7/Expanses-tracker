@@ -1,9 +1,22 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
+import { IntlProvider } from "react-intl";
+
 import { AppReducer } from "./AppReducer";
+import Russian from "@/lang/ru.json";
+import English from "@/lang/en.json";
 
 const initialState = {
   transactions: [],
 };
+
+const local = navigator.language;
+
+let lang;
+if (local === "ru-RU") {
+  lang = Russian;
+} else if (local === "en") {
+  lang = English;
+}
 
 export const GlobalContext = createContext(initialState);
 
@@ -31,15 +44,33 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const [locale, setLocale] = useState(local);
+  const [message, setMessage] = useState(lang);
+
+  const selectLang = (e) => {
+    const newLocale = e.target.value;
+    setLocale(newLocale);
+
+    if (newLocale === "en") {
+      setMessage(English);
+    } else {
+      setMessage(Russian);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         transactions: state.transactions,
         removeTransaction,
         addTransaction,
+        locale,
+        selectLang,
       }}
     >
-      {children}
+      <IntlProvider locale={locale} messages={message}>
+        {children}
+      </IntlProvider>
     </GlobalContext.Provider>
   );
 };

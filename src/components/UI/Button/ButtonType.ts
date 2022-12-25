@@ -1,4 +1,4 @@
 export interface IButtonType {
-  children: string;
+  children: any;
   disabled: boolean;
 }

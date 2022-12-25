@@ -7,6 +7,8 @@ import { GlobalContext } from "@/context/globalState";
 
 import { nanoid } from "nanoid";
 
+import { FormattedMessage, useIntl } from "react-intl";
+
 import "./Transaction.css";
 
 export const Transaction: FC = () => {
@@ -14,6 +16,12 @@ export const Transaction: FC = () => {
   const [amount, setAmount] = useState("");
 
   const { addTransaction } = useContext(GlobalContext);
+
+  const intl = useIntl();
+  const placeholderText = intl.formatMessage({ id: "app.placeholder.text" });
+  const placeholderAmount = intl.formatMessage({
+    id: "app.placeholder.amount",
+  });
 
   const sendTransaction = (e) => {
     e.preventDefault();
@@ -30,32 +38,45 @@ export const Transaction: FC = () => {
 
   return (
     <>
-      <h3>Add new transaction</h3>
+      <h3>
+        <FormattedMessage
+          id="app.add.transaction"
+          defaultMessage="Add new transaction"
+        />
+      </h3>
       <form onSubmit={sendTransaction}>
         <div className="form-control">
-          <label htmlFor="text">Text</label>
+          <label htmlFor="text">
+            <FormattedMessage id="app.text" defaultMessage="Text" />
+          </label>
           <Input
             autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
             type="text"
-            placeholder="Enter text..."
+            placeholder={placeholderText}
           />
         </div>
         <div className="form-control">
           <label htmlFor="amount">
-            Amount <br />
-            (negative - expense, positive - income)
+            <FormattedMessage id="app.amount" defaultMessage="Amount" /> <br />
+            <FormattedMessage
+              id="app.sign"
+              defaultMessage="(+) - income, (-) - expenses"
+            />
           </label>
           <Input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             type="number"
-            placeholder="Enter amount..."
+            placeholder={placeholderAmount}
           />
         </div>
         <Button disabled={!text.length || !amount.length}>
-          Add transaction
+          <FormattedMessage
+            id="app.add.transaction"
+            defaultMessage="Add transaction"
+          />
         </Button>
       </form>
     </>

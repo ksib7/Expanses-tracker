@@ -3,6 +3,7 @@ import { FC, useContext } from "react";
 import { GlobalContext } from "@/context/globalState";
 
 import "./Balance.css";
+import { FormattedMessage } from "react-intl";
 
 export const Balance: FC = () => {
   const { transactions } = useContext(GlobalContext);
@@ -12,7 +13,9 @@ export const Balance: FC = () => {
 
   return (
     <>
-      <h4>Your Balance</h4>
+      <h4>
+        <FormattedMessage id="app.balance" defaultMessage="Your Balance" />
+      </h4>
       <h1>${sum}</h1>
     </>
   );

@@ -1,0 +1,17 @@
+{
+  "app.header": "Контроль расходов",
+  "app.history": "История",
+  "app.balance": "Ваш баланс",
+  "app.income": "Доходы",
+  "app.expanses": "Расходы",
+  "app.history.empty": "История пуста . . .",
+  "app.add.transaction": "Добавить новую транзакцию",
+  "app.text": "Описание",
+  "app.amount": "Сумма",
+  "app.sign": "(+) - доходы, (-) - расходы",
+  "app.add.button": "Добавить транзакцию",
+  "app.language": "Русский",
+  "app.placeholder.text": "Введите описание . . .",
+  "app.placeholder.amount": "Введите сумму . . .",
+  "app.set.language": "Язык:"
+}

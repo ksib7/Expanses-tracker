@@ -1,0 +1,17 @@
+{
+  "app.header": "Expense Tracker",
+  "app.history": "History",
+  "app.balance": "Your balance",
+  "app.income": "Income",
+  "app.expanses": "Expanses",
+  "app.history.empty": "History is an empty . . .",
+  "app.add.transaction": "Add new transaction",
+  "app.text": "Text",
+  "app.amount": "Amount",
+  "app.sign": "(+) - income, (-) - expenses",
+  "app.add.button": "Add transaction",
+  "app.language": "Russian",
+  "app.placeholder.text": "Enter text . . .",
+  "app.placeholder.amount": "Enter amount . . .",
+  "app.set.language": "Language:"
+}

@@ -1,4 +1,5 @@
 import { FC, useContext } from "react";
+import { FormattedMessage } from "react-intl";
 
 import { GlobalContext } from "@/context/globalState";
 
@@ -10,9 +11,17 @@ export const History: FC = () => {
 
   return (
     <>
-      <h3>History</h3>
+      <h3>
+        <FormattedMessage id="app.history" defaultMessage="History" />
+      </h3>
+
       {transactions.length < 1 ? (
-        <p>History is an empty . . .</p>
+        <p style={{ textAlign: "center" }}>
+          <FormattedMessage
+            id="app.history.empty"
+            defaultMessage="History is an empty . . ."
+          />
+        </p>
       ) : (
         <ul className="list">
           {transactions.map((item) => (
