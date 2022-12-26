@@ -18,9 +18,13 @@ export const Transaction: FC = () => {
   const { addTransaction } = useContext(GlobalContext);
 
   const intl = useIntl();
-  const placeholderText = intl.formatMessage({ id: "app.placeholder.text" });
+  const placeholderText = intl.formatMessage({
+    id: "app.placeholder.text",
+    defaultMessage: "Enter text . . .",
+  });
   const placeholderAmount = intl.formatMessage({
     id: "app.placeholder.amount",
+    defaultMessage: "Enter amount . . .",
   });
 
   const sendTransaction = (e) => {
