@@ -9,6 +9,7 @@ export const History: FC = () => {
   const { transactions } = useContext(GlobalContext);
   const { removeTransaction } = useContext(GlobalContext);
   const { locale } = useContext(GlobalContext);
+  const { currency } = useContext(GlobalContext);
 
   return (
     <>
@@ -32,7 +33,11 @@ export const History: FC = () => {
                 {item.amount < 0 ? "-" : "+"}{" "}
                 {
                   <FormattedNumber
-                    value={Math.abs(item.amount)}
+                    value={
+                      locale === "ru-RU"
+                        ? Math.abs(item.amount)
+                        : Math.abs(item.amount) / currency.conversion_rates.RUB
+                    }
                     // eslint-disable-next-line react/style-prop-object
                     style="currency"
                     currency={locale === "en" ? "USD" : "RUB"}

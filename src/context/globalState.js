@@ -47,6 +47,25 @@ export const GlobalProvider = ({ children }) => {
   const [locale, setLocale] = useState(local);
   const [message, setMessage] = useState(lang);
 
+  const [currency, setCurrency] = useState([]);
+
+  const getCurrency = async () => {
+    try {
+      const content = await fetch(
+        "https://v6.exchangerate-api.com/v6/3ee81f1ffc4ae5158af23335/latest/USD"
+      );
+      const result = await content.json();
+      setCurrency(result);
+      console.log(result);
+    } catch (err) {
+      console.log(err.name);
+    }
+  };
+
+  useEffect(() => {
+    getCurrency();
+  }, []);
+
   const selectLang = (e) => {
     const newLocale = e.target.value;
     setLocale(newLocale);
@@ -66,6 +85,7 @@ export const GlobalProvider = ({ children }) => {
         addTransaction,
         locale,
         selectLang,
+        currency,
       }}
     >
       <IntlProvider locale={locale} messages={message}>

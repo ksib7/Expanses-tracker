@@ -7,6 +7,7 @@ import "./IncomeExpanses.css";
 export const IncomeExpanses: FC = () => {
   const { transactions } = useContext(GlobalContext);
   const { locale } = useContext(GlobalContext);
+  const { currency } = useContext(GlobalContext);
 
   const income = transactions
     .filter((item) => item.amount > 0)
@@ -25,7 +26,11 @@ export const IncomeExpanses: FC = () => {
         <p className="money plus">
           +
           <FormattedNumber
-            value={income}
+            value={
+              locale === "ru-RU"
+                ? income
+                : income / currency.conversion_rates.RUB
+            }
             // eslint-disable-next-line react/style-prop-object
             style="currency"
             currency={locale === "en" ? "USD" : "RUB"}
@@ -39,7 +44,11 @@ export const IncomeExpanses: FC = () => {
         <p className="money minus">
           -
           <FormattedNumber
-            value={Math.abs(expanses)}
+            value={
+              locale === "en"
+                ? Math.abs(expanses * -1) / currency.conversion_rates.RUB
+                : Math.abs(expanses)
+            }
             // eslint-disable-next-line react/style-prop-object
             style="currency"
             currency={locale === "en" ? "USD" : "RUB"}
