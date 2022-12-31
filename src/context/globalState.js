@@ -56,7 +56,6 @@ export const GlobalProvider = ({ children }) => {
       );
       const result = await content.json();
       setCurrency(result);
-      console.log(result);
     } catch (err) {
       console.log(err.name);
     }
