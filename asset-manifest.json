@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Expanses-tracker/static/css/main.708cb07b.css",
-    "main.js": "/Expanses-tracker/static/js/main.70a935cc.js",
+    "main.js": "/Expanses-tracker/static/js/main.c3527a4c.js",
     "index.html": "/Expanses-tracker/index.html",
     "main.708cb07b.css.map": "/Expanses-tracker/static/css/main.708cb07b.css.map",
-    "main.70a935cc.js.map": "/Expanses-tracker/static/js/main.70a935cc.js.map"
+    "main.c3527a4c.js.map": "/Expanses-tracker/static/js/main.c3527a4c.js.map"
   },
   "entrypoints": [
     "static/css/main.708cb07b.css",
-    "static/js/main.70a935cc.js"
+    "static/js/main.c3527a4c.js"
   ]
 }
