@@ -63,7 +63,7 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     getCurrency();
-  }, []);
+  }, [locale]);
 
   const selectLang = (e) => {
     const newLocale = e.target.value;
