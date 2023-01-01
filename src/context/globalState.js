@@ -47,7 +47,7 @@ export const GlobalProvider = ({ children }) => {
   const [locale, setLocale] = useState(local);
   const [message, setMessage] = useState(lang);
 
-  const [currency, setCurrency] = useState([]);
+  const [usd, setUsd] = useState([]);
 
   const getCurrency = async () => {
     try {
@@ -55,7 +55,7 @@ export const GlobalProvider = ({ children }) => {
         "https://v6.exchangerate-api.com/v6/3ee81f1ffc4ae5158af23335/latest/USD"
       );
       const result = await content.json();
-      setCurrency(result);
+      setUsd(result);
     } catch (err) {
       console.log(err.name);
     }
@@ -84,7 +84,7 @@ export const GlobalProvider = ({ children }) => {
         addTransaction,
         locale,
         selectLang,
-        currency,
+        usd,
       }}
     >
       <IntlProvider locale={locale} messages={message}>

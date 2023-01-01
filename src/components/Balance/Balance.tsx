@@ -8,10 +8,20 @@ import { FormattedMessage, FormattedNumber } from "react-intl";
 export const Balance: FC = () => {
   const { transactions } = useContext(GlobalContext);
   const { locale } = useContext(GlobalContext);
-  const { currency } = useContext(GlobalContext);
+  const { usd } = useContext(GlobalContext);
 
   const amounts = transactions.map((item) => item.amount);
   const sum = amounts.reduce((prev, cur) => prev + cur, 0).toFixed(2);
+
+  const sumCurrency = () => {
+    if (locale === "ru-RU") {
+      return sum;
+    } else if (locale === "en") {
+      return sum / usd.conversion_rates.RUB;
+    } else {
+      return sum;
+    }
+  };
 
   return (
     <>
@@ -20,7 +30,7 @@ export const Balance: FC = () => {
       </h4>
       <h1>
         <FormattedNumber
-          value={locale === "ru-RU" ? sum : sum / currency.conversion_rates.RUB}
+          value={sumCurrency()}
           // eslint-disable-next-line react/style-prop-object
           style="currency"
           currency={locale === "en" ? "USD" : "RUB"}

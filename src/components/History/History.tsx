@@ -9,7 +9,17 @@ export const History: FC = () => {
   const { transactions } = useContext(GlobalContext);
   const { removeTransaction } = useContext(GlobalContext);
   const { locale } = useContext(GlobalContext);
-  const { currency } = useContext(GlobalContext);
+  const { usd } = useContext(GlobalContext);
+
+  const sumCurrency = (item) => {
+    if (locale === "ru-RU") {
+      return Math.abs(item);
+    } else if (locale === "en") {
+      return Math.abs(item) / usd.conversion_rates.RUB;
+    } else {
+      return Math.abs(item);
+    }
+  };
 
   return (
     <>
@@ -33,11 +43,12 @@ export const History: FC = () => {
                 {item.amount < 0 ? "-" : "+"}{" "}
                 {
                   <FormattedNumber
-                    value={
+                    value={sumCurrency(item.amount)}
+                    /* value={
                       locale === "ru-RU"
                         ? Math.abs(item.amount)
-                        : Math.abs(item.amount) / currency.conversion_rates.RUB
-                    }
+                        : Math.abs(item.amount) / usd.conversion_rates.RUB
+                    } */
                     // eslint-disable-next-line react/style-prop-object
                     style="currency"
                     currency={locale === "en" ? "USD" : "RUB"}

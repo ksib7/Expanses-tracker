@@ -7,7 +7,7 @@ import "./IncomeExpanses.css";
 export const IncomeExpanses: FC = () => {
   const { transactions } = useContext(GlobalContext);
   const { locale } = useContext(GlobalContext);
-  const { currency } = useContext(GlobalContext);
+  const { usd } = useContext(GlobalContext);
 
   const income = transactions
     .filter((item) => item.amount > 0)
@@ -16,6 +16,26 @@ export const IncomeExpanses: FC = () => {
   const expanses = transactions
     .filter((item) => item.amount < 0)
     .reduce((prev, cur) => prev + cur.amount, 0);
+
+  const incomeCurrency = () => {
+    if (locale === "ru-RU") {
+      return income;
+    } else if (locale === "en") {
+      return income / usd.conversion_rates.RUB;
+    } else {
+      return income;
+    }
+  };
+
+  const expansesCurrency = () => {
+    if (locale === "ru-RU") {
+      return Math.abs(expanses);
+    } else if (locale === "en") {
+      return Math.abs(expanses) / usd.conversion_rates.RUB;
+    } else {
+      return Math.abs(expanses);
+    }
+  };
 
   return (
     <div className="inc-exp-container">
@@ -26,11 +46,7 @@ export const IncomeExpanses: FC = () => {
         <p className="money plus">
           +
           <FormattedNumber
-            value={
-              locale === "ru-RU"
-                ? income
-                : income / currency.conversion_rates.RUB
-            }
+            value={incomeCurrency()}
             // eslint-disable-next-line react/style-prop-object
             style="currency"
             currency={locale === "en" ? "USD" : "RUB"}
@@ -44,11 +60,7 @@ export const IncomeExpanses: FC = () => {
         <p className="money minus">
           -
           <FormattedNumber
-            value={
-              locale === "en"
-                ? Math.abs(expanses * -1) / currency.conversion_rates.RUB
-                : Math.abs(expanses)
-            }
+            value={expansesCurrency()}
             // eslint-disable-next-line react/style-prop-object
             style="currency"
             currency={locale === "en" ? "USD" : "RUB"}
