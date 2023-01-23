@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, FC } from "react";
 import { FormattedMessage } from "react-intl";
 
 import { GlobalContext } from "@/context/globalState";
@@ -7,7 +7,7 @@ import { FormControl } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-export const Selection = () => {
+export const Selection: FC = () => {
   const { selectLang } = useContext(GlobalContext);
   const { locale } = useContext(GlobalContext);
 
@@ -23,7 +23,9 @@ export const Selection = () => {
         <MenuItem value="ru-RU">
           <FormattedMessage id="app.language" defaultMessage="Русский" />
         </MenuItem>
-        <MenuItem value="en" selected>English</MenuItem>
+        <MenuItem value="en" selected>
+          English
+        </MenuItem>
       </Select>
     </FormControl>
   );

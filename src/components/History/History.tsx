@@ -3,6 +3,8 @@ import { FormattedMessage, FormattedNumber } from "react-intl";
 
 import { GlobalContext } from "@/context/globalState";
 
+import { motion } from "framer-motion";
+
 import "./History.css";
 
 export const History: FC = () => {
@@ -11,7 +13,7 @@ export const History: FC = () => {
   const { locale } = useContext(GlobalContext);
   const { usd } = useContext(GlobalContext);
 
-  const sumCurrency = (item) => {
+  const sumCurrency = (item: number): number => {
     if (locale === "ru-RU") {
       return Math.abs(item);
     } else if (locale === "en") {
@@ -37,18 +39,23 @@ export const History: FC = () => {
       ) : (
         <ul className="list">
           {transactions.map((item) => (
-            <li key={item.id} className={item.amount < 0 ? "minus" : "plus"}>
+            <motion.li
+              key={item.id}
+              className={item.amount < 0 ? "minus" : "plus"}
+              whileHover={{
+                boxShadow: "0px 0px 8px 3px rgba(34, 60, 80, 0.24)",
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: "easeInOut" }}
+              layout
+            >
               {item.text}
               <span>
                 {item.amount < 0 ? "-" : "+"}{" "}
                 {
                   <FormattedNumber
                     value={sumCurrency(item.amount)}
-                    /* value={
-                      locale === "ru-RU"
-                        ? Math.abs(item.amount)
-                        : Math.abs(item.amount) / usd.conversion_rates.RUB
-                    } */
                     // eslint-disable-next-line react/style-prop-object
                     style="currency"
                     currency={locale === "en" ? "USD" : "RUB"}
@@ -61,7 +68,7 @@ export const History: FC = () => {
               >
                 x
               </button>
-            </li>
+            </motion.li>
           ))}
         </ul>
       )}

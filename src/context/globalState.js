@@ -69,7 +69,20 @@ export const GlobalProvider = ({ children }) => {
     const newLocale = e.target.value;
     setLocale(newLocale);
 
-    if (newLocale === "en") {
+    if (
+      newLocale === "en" ||
+      newLocale === "en-US" ||
+      newLocale === "en-EG" ||
+      newLocale === "en-AU" ||
+      newLocale === "en-GB" ||
+      newLocale === "en-CA" ||
+      newLocale === "en-NZ" ||
+      newLocale === "en-IE" ||
+      newLocale === "en-ZA" ||
+      newLocale === "en-JM" ||
+      newLocale === "en-BZ" ||
+      newLocale === "en-TT"
+    ) {
       setMessage(English);
     } else {
       setMessage(Russian);

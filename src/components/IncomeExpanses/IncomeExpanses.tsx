@@ -2,6 +2,8 @@ import { GlobalContext } from "@/context/globalState";
 import { FC, useContext } from "react";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 
+import { motion } from "framer-motion";
+
 import "./IncomeExpanses.css";
 
 export const IncomeExpanses: FC = () => {
@@ -9,15 +11,15 @@ export const IncomeExpanses: FC = () => {
   const { locale } = useContext(GlobalContext);
   const { usd } = useContext(GlobalContext);
 
-  const income = transactions
+  const income: number = transactions
     .filter((item) => item.amount > 0)
     .reduce((prev, cur) => prev + cur.amount, 0);
 
-  const expanses = transactions
+  const expanses: number = transactions
     .filter((item) => item.amount < 0)
     .reduce((prev, cur) => prev + cur.amount, 0);
 
-  const incomeCurrency = () => {
+  const incomeCurrency = (): number => {
     if (locale === "ru-RU") {
       return income;
     } else if (locale === "en") {
@@ -43,7 +45,12 @@ export const IncomeExpanses: FC = () => {
         <h4>
           <FormattedMessage id="app.income" defaultMessage="Income" />
         </h4>
-        <p className="money plus">
+        <motion.p
+          className="money plus"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ease: "easeInOut" }}
+        >
           +
           <FormattedNumber
             value={incomeCurrency()}
@@ -51,13 +58,18 @@ export const IncomeExpanses: FC = () => {
             style="currency"
             currency={locale === "en" ? "USD" : "RUB"}
           />
-        </p>
+        </motion.p>
       </div>
       <div>
         <h4>
           <FormattedMessage id="app.expanses" defaultMessage="Expanses" />
         </h4>
-        <p className="money minus">
+        <motion.p
+          className="money minus"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ease: "easeInOut" }}
+        >
           -
           <FormattedNumber
             value={expansesCurrency()}
@@ -65,7 +77,7 @@ export const IncomeExpanses: FC = () => {
             style="currency"
             currency={locale === "en" ? "USD" : "RUB"}
           />
-        </p>
+        </motion.p>
       </div>
     </div>
   );
